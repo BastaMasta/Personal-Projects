@@ -1,0 +1,188 @@
+import pickle
+from os import system, name
+
+
+def print_hangyman(life):
+    doub_b = "\\\\"
+    if life == 6:
+
+        print("                            ==========================    ")
+        print("                            |                       ||    ")
+        print("                            |                       ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("   ===================================================    ")
+
+    elif life == 5:
+
+        print("                            ==========================    ")
+        print("                            |                       ||    ")
+        print("                            |                       ||    ")
+        print("                          ======                    ||    ")
+        print("                        //      {}                  ||    ".format(doub_b))
+        print("                        {}      //                  ||    ".format(doub_b))
+        print("                          ======                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("   ===================================================    ")
+
+    elif life == 4:
+
+        print("                            ==========================    ")
+        print("                            |                       ||    ")
+        print("                            |                       ||    ")
+        print("                          ======                    ||    ")
+        print("                        //      {}                  ||    ".format(doub_b))
+        print("                        {}      //                  ||    ".format(doub_b))
+        print("                          ======                    ||    ")
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("   ===================================================    ")
+
+    elif life == 3:
+
+        print("                            ==========================    ")
+        print("                            |                       ||    ")
+        print("                            |                       ||    ")
+        print("                          ======                    ||    ")
+        print("                        //      {}                  ||    ".format(doub_b))
+        print("                        {}      //                  ||    ".format(doub_b))
+        print("                          ======                    ||    ")
+        print("                          //||                      ||    ")
+        print("                         // ||                      ||    ")
+        print("                        //  ||                      ||    ")
+        print("                       //   ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("   ===================================================    ")
+
+    elif life == 2:
+
+        print("                            ==========================    ")
+        print("                            |                       ||    ")
+        print("                            |                       ||    ")
+        print("                          ======                    ||    ")
+        print("                        //      {}                  ||    ".format(doub_b))
+        print("                        {}      //                  ||    ".format(doub_b))
+        print("                          ======                    ||    ")
+        print("                          //|| {}                   ||    ".format(doub_b))
+        print("                         // ||  {}                  ||    ".format(doub_b))
+        print("                        //  ||   {}                 ||    ".format(doub_b))
+        print("                       //   ||    {}                ||    ".format(doub_b))
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("   ===================================================    ")
+
+    elif life == 1:
+
+        print("                            ==========================    ")
+        print("                            |                       ||    ")
+        print("                            |                       ||    ")
+        print("                          ======                    ||    ")
+        print("                        //      {}                  ||    ".format(doub_b))
+        print("                        {}      //                  ||    ".format(doub_b))
+        print("                          ======                    ||    ")
+        print("                          //|| {}                   ||    ".format(doub_b))
+        print("                         // ||  {}                  ||    ".format(doub_b))
+        print("                        //  ||   {}                 ||    ".format(doub_b))
+        print("                       //   ||    {}                ||    ".format(doub_b))
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                           //                       ||    ")
+        print("                          //                        ||    ")
+        print("                         //                         ||    ")
+        print("                        //                          ||    ")
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("   ===================================================    ")
+
+    elif life == 0:
+
+        print("                            ==========================    ")
+        print("                            |                       ||    ")
+        print("                            |                       ||    ")
+        print("                          ======                    ||    ")
+        print("                        // X  X {}                  ||    ".format(doub_b))
+        print("                        {}      //                  ||    ".format(doub_b))
+        print("                          ======                    ||    ")
+        print("                          //|| {}                   ||    ".format(doub_b))
+        print("                         // ||  {}                  ||    ".format(doub_b))
+        print("                        //  ||   {}                 ||    ".format(doub_b))
+        print("                       //   ||    {}                ||    ".format(doub_b))
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                            ||                      ||    ")
+        print("                           //{}                     ||    ".format(doub_b))
+        print("                          //  {}                    ||    ".format(doub_b))
+        print("                         //    {}                   ||    ".format(doub_b))
+        print("                        //      {}                  ||    ".format(doub_b))
+        print("                                                    ||    ")
+        print("                                                    ||    ")
+        print("   ===================================================    ")
+
+    elif life == 69:
+        logo = pickle.load(open("logo.pickle", 'rb'))
+        print(logo)
+
+
+# define our clear function
+def clear():
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+
+    # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
