@@ -3,9 +3,8 @@ use brainfuck_interpreter::brain_fuck::{analyse,
                                         cleanup, extract,
                                         print_usage_and_exit};
 
-#[allow(unused_assignments)]
 fn main() {
-    let mut code: Vec<char> = Vec::new();
+    let code: Vec<char>;
     {
         let mut args: Vec<String> = std::env::args().skip(1).collect();
         if args.is_empty() {
