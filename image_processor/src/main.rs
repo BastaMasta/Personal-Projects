@@ -5,8 +5,7 @@ fn main(){
 
     let mut args: Vec < String > = std::env::args().skip(1).collect();
     if args.is_empty() {
-        println!("ERROR");
-        std::process::exit(-1);
+        print_usage_and_exit();
     }
     let infile = args.remove(0);
     let outfile = args.remove(0);
@@ -64,35 +63,56 @@ fn do_processes(param: &mut Vec<String>,args: &mut Vec<String>, img: &mut Dynami
     let t1 = param.remove(0);
     match t1.as_str() {
         "brighten" => {
-            let amt :i32 = args.remove(0).parse().expect("Failed to read parameters- amt");
+            let amt :i32 = match args.remove(0).parse(){
+                Ok(n) => n,
+                Err(_) => {print_usage_and_exit(); 0}
+            };
             *img = img.brighten(amt);
             println!("Image brightened by {}", amt);
         },
 
         "blur" => {
-            let factor :f32 = args.remove(0).parse().expect("Failed to read parameters - amt_b");
+            let factor :f32  = match args.remove(0).parse(){
+                Ok(n) => n,
+                Err(_) => {print_usage_and_exit(); 0.0}
+            };
             *img = img.blur(factor);
             println!("Image blurred by {}", factor);
         },
 
         "crop" => {
-            let x :u32 = args.remove(0).parse().expect("Failed to read parameters - x");
-            let y :u32 = args.remove(0).parse().expect("Failed to read parameters - y");
-            let width :u32 = args.remove(0).parse().expect("Failed to read parameters - width");
-            let height :u32 = args.remove(0).parse().expect("Failed to read parameters - height");
+            let x :u32 = match args.remove(0).parse(){
+                Ok(n) => n,
+                Err(_) => {print_usage_and_exit(); 0}
+            };
+            let y :u32 = match args.remove(0).parse(){
+                Ok(n) => n,
+                Err(_) => {print_usage_and_exit(); 0}
+            };
+            let width :u32 = match args.remove(0).parse(){
+                Ok(n) => n,
+                Err(_) => {print_usage_and_exit(); 0}
+            };
+            let height :u32 = match args.remove(0).parse(){
+                Ok(n) => n,
+                Err(_) => {print_usage_and_exit(); 0}
+            };
             *img = img.crop(x, y, width, height);
             println!("Image cropped to x:{} y:{} wodth:{} Height:{}", x,y,width,height);
         },
 
         "rotate" => {
-            let amt_r :i32 = args.remove(0).parse().expect("Failed to read parameters- amt_r");
+            let amt_r :i32 = match args.remove(0).parse(){
+                Ok(n) => n,
+                Err(_) => {print_usage_and_exit(); 0}
+            };
             *img = match amt_r {
                 90 => img.rotate90(),
                 180 => img.rotate180(),
                 270 => img.rotate270(),
                 _ => {
-                    println!("ERROR");
-                    std::process::exit(-1);
+                    print_usage_and_exit();
+                    img.clone()
                 },
             };
             println!("Image rotated by {}", amt_r);
@@ -109,8 +129,20 @@ fn do_processes(param: &mut Vec<String>,args: &mut Vec<String>, img: &mut Dynami
         },
 
         _ => {
-            println!("ERROR");
-            std::process::exit(-1);
+            print_usage_and_exit();
         },
     }
+}
+
+fn print_usage_and_exit(){
+    println!("An Error Occured!\nmake sure you are using the proper syntax for the program!");
+    println!("Basic syntax: \n cargo run --release <infile> <outfile> <processes ans parameters>");
+    println!("Processes and parameters:");
+    println!("a.  blur <blur factor>");
+    println!("b.  brighten <brighten factor>");
+    println!("c.  crop <xOrigin> <yOrigin> <width> <height>");
+    println!("d.  rotate <amount in degrees [90, 180 or 270]>");
+    println!("e.  grayscale [no parameters]");
+    println!("f.  invert [no parameters]");
+    std::process::exit(-1);
 }
