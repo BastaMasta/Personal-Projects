@@ -12,7 +12,7 @@ impl CoffeeMachine {
         println!("Coffee : {}g", self.coffee);
     }
 
-    pub fn make(&mut self, coffee_type: &CoffeeType, money: f64){
+    pub fn make(&mut self, coffee_type: CoffeeType, money: f64){
         match coffee_type {
             CoffeeType::Espresso => {
                 if self.water < 50 {
@@ -78,6 +78,7 @@ pub enum CoffeeType {
     Cappuccino,
 }
 
+#[derive(Debug)]
 pub struct Coins {
     pub pennies: u32,
     pub nickels : u32,
