@@ -1,8 +1,7 @@
 use coffee_machine::coffee_machine::{CoffeeMachine, CoffeeType, Coins};
 use std::io;
 
-#[allow(unused_mut)]
-#[allow(unused_variables)]
+
 fn main() {
     let mut coffee_machine = CoffeeMachine {
         water: 300,
