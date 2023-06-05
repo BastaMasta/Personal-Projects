@@ -15,6 +15,6 @@ A interpreter for the language BrainFuck, made by me in Rust
 A mini coffee vending machine emulation in Rust
 
 ### image_processor
-A program that carries out different methods on images, like blur, brighten, grayscale, invert and rotate
+A program that carries out different methods on images, like blur, brighten, grayscale, invert and rotate. Made in Rust.
 
 ### And more to come.
