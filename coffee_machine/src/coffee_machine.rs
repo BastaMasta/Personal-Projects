@@ -1,3 +1,5 @@
+use std::io;
+
 pub struct CoffeeMachine {
     pub water : u32,
     pub milk : u32,
@@ -21,12 +23,12 @@ impl CoffeeMachine {
                     println!("Not enough coffee!")
                 } else if money < 1.50 {
                     println!("Not enough money!");
-                    println!("you need {}$ more to get an Espresso!", (1.50 - money));
+                    println!("you need {:.2}$ more to get an Espresso!", (1.50 - money));
                 } else {
                     self.water -= 100;
                     self.coffee -= 18;
                     self.money += 1.50;
-                    println!("Here is your ${} in change", (money-1.50));
+                    println!("Here is your ${:.2} in change", (money-1.50));
                     println!("Enjoy your Espresso☕!");
                 }
             },
@@ -39,13 +41,13 @@ impl CoffeeMachine {
                     println!("Not enough coffee!")
                 } else if money < 2.50 {
                     println!("Not enough money!");
-                    println!("you need {}$ more to get a Latte!", (2.50 - money));
+                    println!("you need {:.2}$ more to get a Latte!", (2.50 - money));
                 } else {
                     self.water -= 200;
                     self.milk -= 150;
                     self.coffee -= 24;
                     self.money += 2.50;
-                    println!("Here is your ${} in change", (money-2.50));
+                    println!("Here is your ${:.2} in change", (money-2.50));
                     println!("Enjoy your Latte☕!");
                 }
             },
@@ -58,13 +60,13 @@ impl CoffeeMachine {
                     println!("Not enough coffee!")
                 } else if money < 3.00 {
                     println!("Not enough money!");
-                    println!("you need {}$ more to get a Latte!", (3.00 - money));
+                    println!("you need {:.2}$ more to get a Latte!", (3.00 - money));
                 } else {
                     self.water -= 250;
                     self.milk -= 100;
                     self.coffee -= 24;
                     self.money += 3.00;
-                    println!("Here is your ${} in change", (money-3.00));
+                    println!("Here is your ${:.2} in change", (money-3.00));
                     println!("Enjoy your Latte☕!");
                 }
             },
@@ -80,14 +82,34 @@ pub enum CoffeeType {
 
 #[derive(Debug)]
 pub struct Coins {
-    pub pennies: u32,
-    pub nickels : u32,
-    pub dimes : u32,
-    pub quarters : u32,
+    pub pennies: f64,
+    pub nickels : f64,
+    pub dimes : f64,
+    pub quarters : f64,
 }
 
 impl Coins {
     pub fn calculate(&self)-> f64 {
-        (self.pennies)as f64 *0.1 + (self.nickels)as f64 *0.5 + (self.dimes)as f64 *0.10 + (self.quarters)as f64 *0.25
+        (self.pennies)*0.01 + (self.nickels)*0.05 + (self.dimes)*0.10 + (self.quarters)*0.25
+    }
+    pub fn take_inp(&mut self) {
+        let mut temp_str = String::new();
+        println!("Enter number of pennies:");
+        io::stdin().read_line(&mut temp_str).expect("Failed to read input!");
+        self.pennies = temp_str.trim().parse().expect("please enter valid number!");
+        temp_str.clear();
+        println!("Enter number of nickels:");
+        io::stdin().read_line(&mut temp_str).expect("Failed to read input!");
+        self.nickels = temp_str.trim().parse().expect("please enter valid number!");
+        temp_str.clear();
+        println!("Enter number of dimes:");
+        io::stdin().read_line(&mut temp_str).expect("Failed to read input!");
+        self.dimes = temp_str.trim().parse().expect("please enter valid number!");
+        temp_str.clear();
+        println!("Enter number of quarters:");
+        io::stdin().read_line(&mut temp_str).expect("Failed to read input!");
+        self.quarters = temp_str.trim().parse().expect("please enter valid number!");
+        temp_str.clear();
+        println!("you have entered ${:.2}", self.calculate());
     }
 }
