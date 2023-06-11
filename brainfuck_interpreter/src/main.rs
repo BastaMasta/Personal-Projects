@@ -1,7 +1,5 @@
-use brainfuck_interpreter::brain_fuck::{analyse,
-                                        build_bracemap,
-                                        cleanup, extract,
-                                        print_usage_and_exit};
+use brainfuck_interpreter::brain_fuck::analyse;
+use brainfuck_interpreter::code_prep::{build_bracemap, cleanup, extract, print_usage_and_exit};
 
 fn main() {
     let code: Vec<char>;
