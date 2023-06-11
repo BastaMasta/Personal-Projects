@@ -129,7 +129,15 @@ pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &Vec<usize>) 
             },
 
             _ => {
-                panic!("Command not recognised even after filter! ----> {}", cmd_ptr);
+                match cmd_vec_bf.get(cmd_ptr) {
+                    Some(x) => {
+                        panic!("Command not recognised even after filter! \
+                        Command index --> {} | Command --> {}", cmd_ptr, cmd_vec_bf[x]);
+                    },
+                    None => {
+                        panic!("Command not recognised even after filter! Command index ----> {}", cmd_ptr);
+                    }
+                }
             },
         }
         cmd_ptr += 1;
