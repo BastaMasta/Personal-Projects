@@ -2,7 +2,8 @@
 name = "brainfuck_interpreter"
 version = "0.1.0"
 edition = "2021"
+authors = ["BastaMasta <bastamasta3150@proton.me>"]
+description = "A simple BrainFuck interpreter made by me, in Rust!"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
