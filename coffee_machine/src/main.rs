@@ -1,4 +1,3 @@
-use std::cmp::max_by_key;
 use coffee_machine::coffee_machine::{CoffeeMachine, CoffeeType};
 use std::io;
 
@@ -21,6 +20,9 @@ fn main() {
             }
             "cappuccino" => {
                 coffee_machine.make(CoffeeType::Cappuccino);
+            }
+            "report" => {
+                coffee_machine.report();
             }
             "quit" | "q" | "exit" => {
                 println!("Thanks for using my coffee machine!");

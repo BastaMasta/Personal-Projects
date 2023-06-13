@@ -31,6 +31,7 @@ impl CoffeeMachine {
         println!("Water : {}ml", self.water);
         println!("Milk : {}ml", self.milk);
         println!("Coffee : {}g", self.coffee);
+        println!("Money : {}$", self.money);
     }
 
     pub fn make(&mut self, coffee_type: CoffeeType){
