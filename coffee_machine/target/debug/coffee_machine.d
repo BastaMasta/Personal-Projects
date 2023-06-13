@@ -1,1 +1,0 @@
-C:\Users\basta\Documents\GitHub\Personal-Projects\coffee_machine\target\debug\coffee_machine.exe: C:\Users\basta\Documents\GitHub\Personal-Projects\coffee_machine\src\coffee_machine.rs C:\Users\basta\Documents\GitHub\Personal-Projects\coffee_machine\src\lib.rs C:\Users\basta\Documents\GitHub\Personal-Projects\coffee_machine\src\main.rs
