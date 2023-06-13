@@ -22,4 +22,9 @@ my first project in Rust.
 ### image_processor
 A program that carries out different methods on images, like blur, brighten, grayscale, invert and rotate. Made in Rust.
 
+### mingrep
+#### [Still a WIP]
+a mini version of the grep cli that searches for the instance of a string in a particular file. Made in Rust.
+
+
 ### And more to come.
