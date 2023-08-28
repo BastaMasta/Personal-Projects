@@ -1,5 +1,4 @@
 use std::io;
-use std::io::Read;
 use crate::code_prep::cleanup;
 
 
@@ -16,11 +15,11 @@ pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &Vec<usize>) 
             //Increment byte value
             Some('+') => {
                 match veccy.get_mut(ptr_bf) {
-                    Some(&mut mut x) => {
-                        if x >= 255 {
-                            x = 0;
+                    Some(x) => {
+                        if *x >= 255 {
+                            *x = 0;
                         } else {
-                            x += 1;
+                            *x += 1;
                         }
                     },
                     None => {
@@ -32,11 +31,11 @@ pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &Vec<usize>) 
             // Decrement byte value
             Some('-') => {
                 match veccy.get_mut(ptr_bf) {
-                    Some(&mut mut x) => {
-                        if x <= 0 {
-                            x = 255;
+                    Some(x) => {
+                        if *x <= 0 {
+                            *x = 255;
                         } else {
-                            x -= 1;
+                            *x -= 1;
                         }
                     },
                     None => {}
@@ -107,14 +106,12 @@ pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &Vec<usize>) 
                 match io::stdin().read_line(&mut inp_bf) {
                     Ok(_) => {
                         match veccy.get_mut(ptr_bf) {
-                            Some(&mut mut x) => {
-                                match x += inp_bf.chars().collect::<Vec<chars>>().get(0) {
-                                    Ok(_) => {
-                                        // Do nothing, everything works
-                                    },
-                                    Err(_) => {
-                                        panic!("Error occured! Failed to read caharacter to current byte");
-                                    },
+                            Some(x) => {
+                                if let Some(y) = inp_bf.chars().collect::<Vec<char>>().get(0) {
+                                    *x += (*y) as u32;
+                                }
+                                else {
+                                    panic!("Error occured! Faied to append user input to current memory slot");
                                 }
                             },
                             None => {
@@ -129,10 +126,10 @@ pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &Vec<usize>) 
             },
 
             _ => {
-                match cmd_vec_bf.get(cmd_ptr) {
-                    Some(x) => {
+                match commands_bf.get(cmd_ptr) {
+                    Some(_) => {
                         panic!("Command not recognised even after filter! \
-                        Command index --> {} | Command --> {}", cmd_ptr, cmd_vec_bf[x]);
+                        Command index --> {} | Command --> {}", cmd_ptr, commands_bf[cmd_ptr]);
                     },
                     None => {
                         panic!("Command not recognised even after filter! Command index ----> {}", cmd_ptr);
@@ -145,7 +142,7 @@ pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &Vec<usize>) 
 }
 
 // Operation functions
-/// Legacy functions
+// Legacy functions
 
 /*
 fn incr_bf(veccy_bf: &mut Vec<u32>, ptr_bf: &usize){
