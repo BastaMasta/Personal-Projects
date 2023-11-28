@@ -1,10 +1,10 @@
 use std::io;
 
 pub struct CoffeeMachine {
-    pub water : u32,
-    pub milk : u32,
-    pub coffee : u32,
-    pub money : f64,
+    water : u32,
+    milk : u32,
+    coffee : u32,
+    money : f64,
 }
 
 impl CoffeeMachine {
@@ -104,6 +104,12 @@ impl CoffeeMachine {
     }
 }
 
+impl Default for CoffeeMachine {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 pub enum CoffeeType {
     Espresso,
     Latte,
@@ -119,16 +125,16 @@ pub struct Coins {
 }
 
 impl Coins {
-    pub fn new() -> Self  {
-        Coins {
-            pennies : 0.0,
-            nickels : 0.0,
-            dimes : 0.0,
-            quarters : 0.0,
+    pub fn new() -> Self {
+        Self {
+            pennies: 0.0,
+            nickels: 0.0,
+            dimes: 0.0,
+            quarters: 0.0,
         }
     }
-    pub fn calculate(&self)-> f64 {
-        (self.pennies)*0.01 + (self.nickels)*0.05 + (self.dimes)*0.10 + (self.quarters)*0.25
+    pub fn calculate(&self) -> f64 {
+        (self.pennies) * 0.01 + (self.nickels) * 0.05 + (self.dimes) * 0.10 + (self.quarters) * 0.25
     }
     pub fn take_inp(&mut self) {
         let mut temp_str = String::new();
@@ -147,7 +153,12 @@ impl Coins {
         println!("Enter number of quarters:");
         io::stdin().read_line(&mut temp_str).expect("Failed to read input!");
         self.quarters = temp_str.trim().parse().expect("please enter valid number!");
-        temp_str.clear();
-        println!("you have entered ${:.2}", self.calculate());
     }
 }
+
+impl Default for Coins {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+   
