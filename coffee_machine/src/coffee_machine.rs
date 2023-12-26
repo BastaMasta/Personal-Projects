@@ -46,12 +46,12 @@ impl CoffeeMachine {
                     coins.take_inp();
                     if coins.calculate() < 1.50 {
                         println!("Not enough money!");
-                        println!("you need {:.2}$ more to get an Espresso!", (1.50 - coins.calculate()));
+                        println!("you need {:.2}$ more to get an Espresso!", 1.50 - coins.calculate());
                     } else {
                         self.water -= 100;
                         self.coffee -= 18;
                         self.money += 1.50;
-                        println!("Here is your ${:.2} in change", (coins.calculate()-1.50));
+                        println!("Here is your ${:.2} in change", coins.calculate()-1.50);
                         println!("Enjoy your Espresso☕!");
                     }
                 }
@@ -67,13 +67,13 @@ impl CoffeeMachine {
                     coins.take_inp();
                     if coins.calculate() < 2.50 {
                         println!("Not enough money!");
-                        println!("you need {:.2}$ more to get a Latte!", (2.50 - coins.calculate()));
+                        println!("you need {:.2}$ more to get a Latte!", 2.50 - coins.calculate());
                     } else {
                         self.water -= 200;
                         self.milk -= 150;
                         self.coffee -= 24;
                         self.money += 2.50;
-                        println!("Here is your ${:.2} in change", (coins.calculate()-2.50));
+                        println!("Here is your ${:.2} in change", coins.calculate()-2.50);
                         println!("Enjoy your Latte☕!");
                     }
                 }
@@ -89,13 +89,13 @@ impl CoffeeMachine {
                     coins.take_inp();
                     if coins.calculate() < 3.00 {
                         println!("Not enough money!");
-                        println!("you need {:.2}$ more to get a Latte!", (3.00 - coins.calculate()));
+                        println!("you need {:.2}$ more to get a Latte!", 3.00 - coins.calculate());
                     } else {
                         self.water -= 250;
                         self.milk -= 100;
                         self.coffee -= 24;
                         self.money += 3.00;
-                        println!("Here is your ${:.2} in change", (coins.calculate()-3.00));
+                        println!("Here is your ${:.2} in change", coins.calculate()-3.00);
                         println!("Enjoy your Cappuccino☕!");
                     }
                 }
