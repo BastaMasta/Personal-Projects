@@ -13,59 +13,17 @@ pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &Vec<usize>) 
         match commands_bf.get(cmd_ptr) {
 
             //Increment byte value
-            Some('+') => {
-                match veccy.get_mut(ptr_bf) {
-                    Some(x) => {
-                        if *x >= 255 {
-                            *x = 0;
-                        } else {
-                            *x += 1;
-                        }
-                    },
-                    None => {
-                        panic!("Error occured! Failed to retrieve element for increment operation!");
-                    },
-                }
-            },
+            Some('+') => incr_bf(&mut veccy, &ptr_bf),
 
             // Decrement byte value
-            Some('-') => {
-                match veccy.get_mut(ptr_bf) {
-                    Some(x) => {
-                        if *x <= 0 {
-                            *x = 255;
-                        } else {
-                            *x -= 1;
-                        }
-                    },
-                    None => {}
-                }
-            },
+            Some('-') => decr_bf(&mut veccy, &ptr_bf),
+
 
             // Right pointer shift
-            Some('>') => {
-                ptr_bf += 1;
-                loop {
-                    match veccy.get(ptr_bf) {
-                        Some(_) => {
-                            break;
-                        },
-                        None => {
-                            veccy.push(0);
-                        }
-                    }
-                }
-            },
+            Some('>') => r_shft_bf(&mut veccy, &mut ptr_bf),
 
             // Left Pointer shift
-            Some('<') => {
-                if ptr_bf <= 0 {
-                    ptr_bf = 0;
-                }
-                else {
-                    ptr_bf -= 1;
-                }
-            },
+            Some('<') => l_shft_bf(&mut veccy, &mut ptr_bf),
 
             // Left brace (Loop Starter)
             Some('[') => {
@@ -82,48 +40,10 @@ pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &Vec<usize>) 
             },
 
             //  Print character
-            Some('.') => {
-                match veccy.get(ptr_bf) {
-                    Some(x) => {
-                        match char::from_u32(*x) {
-                            Some(y) => {
-                                print!("{}",y);
-                            },
-                            None => {
-                                panic!("INVALID PRINT REQUEST!");
-                            },
-                        }
-                    },
-                    None => {
-                        panic!("Error occured! Failed to retrieve element for print operation!");
-                    },
-                }
-            },
+            Some('.') => prnt_bf(&mut veccy, &ptr_bf),
 
             // Read character
-            Some(',') => {
-                let mut inp_bf = String::new();
-                match io::stdin().read_line(&mut inp_bf) {
-                    Ok(_) => {
-                        match veccy.get_mut(ptr_bf) {
-                            Some(x) => {
-                                if let Some(y) = inp_bf.chars().collect::<Vec<char>>().get(0) {
-                                    *x += (*y) as u32;
-                                }
-                                else {
-                                    panic!("Error occured! Faied to append user input to current memory slot");
-                                }
-                            },
-                            None => {
-                                panic!("Error occured! Failed to retrieve element for read operation!");
-                            },
-                        }
-                    },
-                    Err(_) => {
-                        panic!("Error occured! Failed to read user input");
-                    },
-                }
-            },
+            Some(',') => inp_bf(&mut veccy, &ptr_bf),
 
             _ => {
                 match commands_bf.get(cmd_ptr) {
@@ -144,7 +64,6 @@ pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &Vec<usize>) 
 // Operation functions
 // Legacy functions
 
-/*
 fn incr_bf(veccy_bf: &mut Vec<u32>, ptr_bf: &usize){
     if let Some(val) = veccy_bf.get_mut(*ptr_bf) {
         if *val >= 255 {
@@ -204,11 +123,16 @@ fn inp_bf(veccy: &mut Vec<u32>, ptr_bf: &usize){
     let mut input_bf = String::new();
     io::stdin().read_line(&mut input_bf).expect("Failed to read input");
 
-    match veccy.get_mut(*ptr_bf) {
-        Some(x) => {
-            *x += *input_bf.chars().collect::<Vec<char>>().get(0).unwrap() as u32;
-        },
-        None => { }
+    if let Some(x) = veccy.get_mut(*ptr_bf) {
+        if let Some(y) = input_bf.chars().collect::<Vec<char>>().get(0) {
+            *x += (*y) as u32;
+        }
+        else {
+            panic!("Error occured! Faied to append user input to current memory slot");
+        }
+    }
+    else{
+        panic!("Error occured! Failed to retrieve element for read operation!");
     }
 }
- */
+
