@@ -5,9 +5,25 @@ pub fn extract(path: String) -> Vec<char>{
     let fwilee = File::open(path);
     match fwilee {
         Ok(mut fwile) => {
-            let mut fwile_cont = String::new();
-            fwile.read_to_string(&mut fwile_cont).ok().expect("Failed to read contents");
-            fwile_cont.replace("\n", "").replace("\r","").chars().collect()
+            let mut fwile_cont_1 = String::new();
+            fwile.read_to_string(&mut fwile_cont_1).ok().expect("Failed to read contents");
+            let fwile_cont_com : Vec<char> = fwile_cont_1.replace("\r","").chars().collect();
+            let mut fwile_cont : Vec<char> = Vec::new();
+            let mut com : bool = false;
+            for i in fwile_cont_com.iter() {
+                if *i == '/' {
+                    com = true;
+                    continue;
+                }
+                else if *i == '\n' {
+                    com = false;
+                    continue;
+                }
+                if !com {
+                    fwile_cont.push(i.clone());
+                }
+            }
+            fwile_cont
         },
         Err(_) => {
             panic!("Failed to open file!");
