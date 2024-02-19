@@ -13,7 +13,7 @@ The game TicTacToe, made in pyton, with 2 player support.
 An interpreter for the language BrainFuck. Made by me in Rust
 
 ### coffee_machine
-A mini coffee vending machine emulation in Rust.
+A mini coffee vending machine emulation in Rust. noice
 
 ### guessing_game
 A guessing game, that chooses arandom number b/w 1 and 100, and you are supposed to guess it, based on the hints you get.
