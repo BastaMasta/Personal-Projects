@@ -6,8 +6,8 @@ pub fn extract(path: String) -> Vec<char>{
     match fwilee {
         Ok(mut fwile) => {
             let mut fwile_cont_1 = String::new();
-            fwile.read_to_string(&mut fwile_cont_1).ok().expect("Failed to read contents");
-            let fwile_cont_com : Vec<char> = fwile_cont_1.replace("\r","").chars().collect();
+            fwile.read_to_string(&mut fwile_cont_1).expect("Failed to read contents");
+            let fwile_cont_com : Vec<char> = fwile_cont_1.replace('\r',"").chars().collect();
             let mut fwile_cont : Vec<char> = Vec::new();
             let mut com : bool = false;
             for i in fwile_cont_com.iter() {
@@ -20,7 +20,7 @@ pub fn extract(path: String) -> Vec<char>{
                     continue;
                 }
                 if !com {
-                    fwile_cont.push(i.clone());
+                    fwile_cont.push(*i);
                 }
             }
             fwile_cont
@@ -60,12 +60,12 @@ pub fn build_bracemap(code: &Vec<char>) -> Vec<usize> {
 pub fn print_usage_and_exit() {
     println!("Usage:");
     println!("      Run command:");
-    println!("          cargo run <optional --release tag> <filename with extension>");
+    println!("          bf.exe <filename or 'help'>");
     println!("Help (Shows this message) :");
     println!("          cargo run help");
     println!("if there was an error, then the program will most likely panic, but there is no");
     println!("need for you to panic, just run your code step-by-step through your head, or you");
-    println!("can do it on paper or sumn, idk thta ususally helps me a lot");
+    println!("can do it on paper or sumn, idk that ususally helps me a lot");
     println!(" ");
     println!("this BrainFuck ineterpreter was made by Sameed Ahmed, enjoy!");
     std::process::exit(-1);

@@ -2,7 +2,7 @@ use std::io;
 use crate::code_prep::cleanup;
 
 
-pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &Vec<usize>) {
+pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &[usize]) {
     let commands_bf = cleanup(cmd_vec_bf);
     let mut veccy : Vec<u32> = Vec::from([0]);
     let mut cmd_ptr = 0;
@@ -28,14 +28,14 @@ pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &Vec<usize>) 
             // Left brace (Loop Starter)
             Some('[') => {
                 if veccy[ptr_bf] == 0 {
-                    cmd_ptr = bracemap[cmd_ptr].clone();
+                    cmd_ptr = bracemap[cmd_ptr];
                 }
             },
 
             // Right brace (Looper / loop terminator)
             Some(']') => {
                 if veccy[ptr_bf] > 0 {
-                    cmd_ptr = bracemap[cmd_ptr].clone();
+                    cmd_ptr = bracemap[cmd_ptr];
                 }
             },
 
@@ -64,24 +64,24 @@ pub fn analyse(cmd_vec_bf: Vec<char>, mut ptr_bf: usize, bracemap: &Vec<usize>) 
 // Operation functions
 // Legacy functions
 
-fn incr_bf(veccy_bf: &mut Vec<u32>, ptr_bf: &usize){
+fn incr_bf(veccy_bf: &mut [u32], ptr_bf: &usize){
     if let Some(val) = veccy_bf.get_mut(*ptr_bf) {
         if *val >= 255 {
             *val = 0;
         }
         else {
-            *val = *val + 1;
+            *val += 1;
         }
     }
 }
 
-fn decr_bf(veccy_bf: &mut Vec<u32>, ptr_bf: &usize){
+fn decr_bf(veccy_bf: &mut [u32], ptr_bf: &usize){
     if let Some(val) = veccy_bf.get_mut(*ptr_bf) {
-        if *val <= 0{
+        if *val == 0{
             *val = 255;
         }
         else {
-            *val = *val - 1;
+            *val -= 1;
         }
     }
 }
@@ -100,8 +100,8 @@ fn r_shft_bf(veccy: &mut Vec<u32>, ptr_bf: &mut usize){
     }
 }
 
-fn l_shft_bf(_veccy_bf: &mut Vec<u32>, ptr_bf: &mut usize){
-    if *ptr_bf <= 0 {
+fn l_shft_bf(_veccy_bf: &mut [u32], ptr_bf: &mut usize){
+    if *ptr_bf == 0 {
         *ptr_bf = 0;
     }
     else {
@@ -110,7 +110,7 @@ fn l_shft_bf(_veccy_bf: &mut Vec<u32>, ptr_bf: &mut usize){
 }
 
 
-fn prnt_bf(veccy_bf: &mut Vec<u32>, ptr_bf: &usize){
+fn prnt_bf(veccy_bf: &mut [u32], ptr_bf: &usize){
     if let Some(val) = char::from_u32(veccy_bf[*ptr_bf]) {
         print!("{}",val);
     }
@@ -119,12 +119,12 @@ fn prnt_bf(veccy_bf: &mut Vec<u32>, ptr_bf: &usize){
     }
 }
 
-fn inp_bf(veccy: &mut Vec<u32>, ptr_bf: &usize){
+fn inp_bf(veccy: &mut [u32], ptr_bf: &usize){
     let mut input_bf = String::new();
     io::stdin().read_line(&mut input_bf).expect("Failed to read input");
 
     if let Some(x) = veccy.get_mut(*ptr_bf) {
-        if let Some(y) = input_bf.chars().collect::<Vec<char>>().get(0) {
+        if let Some(y) = input_bf.chars().collect::<Vec<char>>().first() {
             *x += (*y) as u32;
         }
         else {
